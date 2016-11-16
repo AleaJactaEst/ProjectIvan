@@ -6,20 +6,18 @@ class Edit extends Component {
 
     componentWillMount() {
         this.props.getUser();
-
     }
+
     handleFormSubmit() {
         const data = this.props.values;
         // Call action creator to edit  the user!
 
         this.props.editUser(data);
-
-
     }
+
     handleChange(event) {
         this.setState({name: event.target.value});
     }
-
 
 
     render() {
@@ -27,36 +25,36 @@ class Edit extends Component {
         if(this.props.data) {
             this.handleChange = this.handleChange.bind(this);
             const { handleSubmit, fields: { name, surname, description,status,birthday }} = this.props;
-            const data = this.props.data.data;
+
             return (
                 <form id="add" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                     <fieldset className="form-group">
                         <label>Name:</label>
-                        <input className="form-control" {...name}  placeholder={data.name}   />
+                        <input className="form-control" {...name} type="text" />
                     </fieldset>
                     <fieldset className="form-group">
                         <label>Surname:</label>
-                        <input className="form-control" {...surname}  placeholder={data.surname} type="text"  />
+                        <input className="form-control" {...surname} type="text"  />
                     </fieldset>
                     <fieldset className="form-group">
-                        <img src="../../img/photo.jpg" alt=""/>
+                        <img src="../../img/photo.jpg" alt="Image 1"/>
                     </fieldset>
                     <fieldset className="form-group">
                         <label>Description:</label>
-                        <input className="form-control" {...description} type="text" placeholder={data.description}/>
+                        <input className="form-control" {...description} type="text" />
                     </fieldset>
                     <fieldset className="form-group">
                         <label>Status:</label>
-                        <input className="form-control" {...status} type="text" placeholder={data.status}/>
+                        <input className="form-control" {...status} type="text" />
                     </fieldset>
                     <fieldset className="form-group">
                         <label>Birthday:</label>
-                        <input className="form-control" {...birthday} type="text" placeholder={data.birthday}/>
+                        <input className="form-control" {...birthday} type="text" />
                     </fieldset>
                     <button action="submit" className="btn btn-primary">Save changes</button>
                 </form>
             );
-        }else{
+        } else {
             return (
                 <div></div>
             )
@@ -66,7 +64,17 @@ class Edit extends Component {
 }
 
 function mapStateToProps(state) {
-    return { data: state.auth.data };
+
+    let initialValues = {};
+    
+    if (state.auth.data) {
+       initialValues = state.auth.data.data;
+    }
+
+    return {
+        data: state.auth.data,
+        initialValues: initialValues
+    };
 }
 
 export default reduxForm({

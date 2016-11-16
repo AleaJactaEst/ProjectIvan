@@ -9,7 +9,7 @@ class Profile extends Component {
     }
 
     render() {
-        if(this.props.data){
+        if (this.props.data) {
            const data =this.props.data.data;
             return (
                 <div className="profile">
@@ -18,12 +18,10 @@ class Profile extends Component {
                     <p>Description : <strong>{data.description}</strong></p>
                     <p>Status : <strong>{data.status}</strong></p>
                     <p>Birthday: <strong>{data.birthday}</strong></p>
-                    <button className="btn btn-success">
-                        <Link className="nav-link" to="/edit">Edit profile</Link>
-                    </button>
+                    <Link className="btn btn-success" to="/edit">Edit profile</Link>
                 </div>
             );
-        }else{
+        } else {
             return (
                 <div></div>
             );
